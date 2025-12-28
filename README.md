@@ -23,6 +23,9 @@
 
 An SAP Fiori application.
 
+[![CI](https://github.com/mudadlarishi22-del/GIT_APP/actions/workflows/ci.yml/badge.svg)](https://github.com/mudadlarishi22-del/GIT_APP/actions/workflows/ci.yml)
+[![CD](https://github.com/mudadlarishi22-del/GIT_APP/actions/workflows/cd.yml/badge.svg)](https://github.com/mudadlarishi22-del/GIT_APP/actions/workflows/cd.yml)
+
 ### Starting the generated app
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated application, run the following from the generated application root folder:
@@ -40,5 +43,32 @@ An SAP Fiori application.
 #### Pre-requisites:
 
 1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
+
+### CI/CD Pipelines
+
+This project includes GitHub Actions workflows for Continuous Integration and Continuous Deployment.
+
+#### CI Pipeline
+- Runs on push and pull requests to `main` branch
+- Installs dependencies
+- Runs unit and integration tests
+- Builds the MTA archive
+- Uploads build artifacts
+
+#### CD Pipeline
+- Runs after successful CI on push to `main`
+- Builds the MTA
+- Deploys to SAP Cloud Foundry
+
+#### Setup Secrets for CD
+To enable deployment, add the following secrets to your GitHub repository:
+
+- `CF_API_ENDPOINT`: Your Cloud Foundry API endpoint (e.g., `https://api.cf.us10-001.hana.ondemand.com`)
+- `CF_USERNAME`: Your SAP BTP username
+- `CF_PASSWORD`: Your SAP BTP password
+- `CF_ORG`: Your Cloud Foundry organization
+- `CF_SPACE`: Your Cloud Foundry space
+
+Go to Repository Settings → Secrets and variables → Actions → New repository secret
 
 

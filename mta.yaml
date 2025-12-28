@@ -89,6 +89,12 @@ resources:
     service: html5-apps-repo
     service-name: gitapp-html5-service
     service-plan: app-host
+- name: gitapp-hana-db
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: postgresql-db
+    service-name: gitapp-postgres-db
+    service-plan: trial
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

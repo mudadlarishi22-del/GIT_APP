@@ -1,0 +1,46 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build MTA
+      run: npm run build:mta
+
+    - name: Install Cloud Foundry CLI
+      run: |
+        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+        sudo apt-get update
+        sudo apt-get install cf-cli
+
+    - name: Install CF Multiapps Plugin
+      run: cf install-plugin -r CF-Community "multiapps" -f
+
+    - name: Login to Cloud Foundry
+      run: |
+        cf login -a ${{ secrets.CF_API_ENDPOINT }} -u ${{ secrets.CF_USERNAME }} -p ${{ secrets.CF_PASSWORD }} -o ${{ secrets.CF_ORG }} -s ${{ secrets.CF_SPACE }}
+
+    - name: Deploy to Cloud Foundry
+      run: cf deploy mta_archives/*.mtar

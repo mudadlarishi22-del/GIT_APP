@@ -1,0 +1,4 @@
+COLUMN TABLE "SampleTable" (
+    "ID" INTEGER PRIMARY KEY,
+    "Name" NVARCHAR(100)
+);
