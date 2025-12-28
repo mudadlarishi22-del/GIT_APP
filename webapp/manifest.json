@@ -117,6 +117,11 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "gitapp"
+    "service": "gitapp",
+    "serviceBindings": {
+      "postgresDB": {
+        "serviceInstanceName": "gitapp-postgres-db"
+      }
+    }
   }
 }

@@ -1,15 +1,66 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="gitapp.controller.View1">
-    <Page id="page" title="{i18n>title}">
-    <content>
-        <sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true" layout="ResponsiveGridLayout" id="form0">
-            <sap.ui.layout.form:content>
-                <sap.ui.core:Title text="GIT FORM" id="title0"/>
-                <Label text="Name" id="label0"/>
-                <Input width="100%" id="input0"/>
-                <Input width="100%" id="input1"/>
-                <Label text="Surname" id="label1"/>
-                <Input width="100%" id="input2"/></sap.ui.layout.form:content>
-        </sap.ui.layout.form:SimpleForm>
-    </content>
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core" controllerName="gitapp.controller.View1">
+    <Page id="page" title="SAP Database Demo">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Title text="PostgreSQL Database Connection Demo" level="H2" class="sapUiSmallMarginBottom"/>
+
+                <!-- Connection Status -->
+                <ObjectStatus
+                    text="Database Status: {dbModel>/connectionStatus}"
+                    state="Success"
+                    class="sapUiSmallMarginBottom"/>
+
+                <!-- Action Buttons -->
+                <HBox class="sapUiSmallMarginBottom">
+                    <Button text="Test Connection" press="onTestConnection" type="Emphasized" class="sapUiSmallMarginEnd"/>
+                    <Button text="Refresh Data" press="onRefreshData" class="sapUiSmallMarginEnd"/>
+                    <Button text="Add Sample Data" press="onAddData" type="Accept"/>
+                </HBox>
+
+                <!-- Database Data Table -->
+                <Table
+                    id="databaseTable"
+                    items="{dbModel>/databaseData}"
+                    class="sapUiSmallMarginTop">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="Database Records" level="H3"/>
+                            <ToolbarSpacer/>
+                            <Text text="{dbModel>/databaseData/length} records"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Text text="ID"/>
+                        </Column>
+                        <Column>
+                            <Text text="Name"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{dbModel>ID}"/>
+                                <Text text="{dbModel>Name}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+                <!-- Info Panel -->
+                <Panel headerText="Implementation Notes" class="sapUiSmallMarginTop">
+                    <content>
+                        <Text text="This demo shows how a SAP UI5 application would connect to a PostgreSQL database:"/>
+                        <VBox class="sapUiSmallMarginTop">
+                            <Text text="1. Database service is bound in manifest.json"/>
+                            <Text text="2. Backend service provides REST API endpoints"/>
+                            <Text text="3. UI5 app calls backend APIs for data operations"/>
+                            <Text text="4. Data is displayed in SAP UI5 controls"/>
+                        </VBox>
+                        <Text text="Note: Actual database connection requires a backend service (blocked by trial route quota)" class="sapUiSmallMarginTop"/>
+                    </content>
+                </Panel>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>

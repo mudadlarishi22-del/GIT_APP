@@ -57,6 +57,15 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+- name: gitapp-backend
+  type: nodejs
+  path: backend
+  requires:
+  - name: gitapp-hana-db
+  provides:
+  - name: gitapp-backend-api
+    properties:
+      url: '${default-url}'
 resources:
 - name: gitapp-destination-service
   type: org.cloudfoundry.managed-service

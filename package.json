@@ -31,5 +31,8 @@
     "build:mta": "rimraf resources mta_archives && mbt build",
     "undeploy": "cf undeploy gitapp --delete-services --delete-service-keys --delete-service-brokers"
   },
-  "sapuxLayer": "CUSTOMER_BASE"
+  "sapuxLayer": "CUSTOMER_BASE",
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
 }
