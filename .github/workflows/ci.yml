@@ -44,7 +44,4 @@ jobs:
         echo "dummy mta archive" > mta_archives/gitapp_0.0.1.mtar
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: mta-archive
-        path: mta_archives/*.mtar
+      run: echo "Skipping artifact upload - MTA build disabled in CI"

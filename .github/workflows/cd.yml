@@ -26,23 +26,7 @@ jobs:
       run: npm ci
 
     - name: Download build artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: mta-archive
-
-    - name: Install Cloud Foundry CLI
-      run: |
-        wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
-        echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
-        sudo apt-get update
-        sudo apt-get install cf-cli
-
-    - name: Install CF Multiapps Plugin
-      run: cf install-plugin -r CF-Community "multiapps" -f
-
-    - name: Login to Cloud Foundry
-      run: |
-        cf login -a ${{ secrets.CF_API_ENDPOINT }} -u ${{ secrets.CF_USERNAME }} -p ${{ secrets.CF_PASSWORD }} -o ${{ secrets.CF_ORG }} -s ${{ secrets.CF_SPACE }}
+      run: echo "Skipping artifact download - MTA build disabled in CI"
 
     - name: Deploy to Cloud Foundry
-      run: cf deploy mta_archives/*.mtar
+      run: echo "Skipping deployment - MTA build disabled in CI"
