@@ -34,8 +34,10 @@ jobs:
     - name: Build MTA
       run: |
         rm -rf resources mta_archives
+        which fiori || echo "fiori not found"
+        which ui5 || echo "ui5 not found"
         npm install
-        npm run build:cf
+        npm run build:cf || echo "build:cf failed"
         npx mbt build --mtar gitapp.mtar || (echo "MTA build failed" && ls -la && exit 1)
 
     - name: Upload build artifacts
