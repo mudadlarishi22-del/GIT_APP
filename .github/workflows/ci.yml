@@ -34,7 +34,7 @@ jobs:
     - name: Build UI5 App
       run: |
         npm install
-        npx ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateCachebusterInfo
+        npx ui5 build --config ui5-deploy.yaml --dest dist
         ls -la dist/
 
     - name: Build MTA
