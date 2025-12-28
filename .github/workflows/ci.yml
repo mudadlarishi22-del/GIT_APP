@@ -34,7 +34,7 @@ jobs:
     - name: Build MTA
       run: |
         rm -rf resources mta_archives
-        npx mbt build
+        npx mbt build --mtar gitapp.mtar || (echo "MTA build failed" && ls -la && cat mta.yaml && exit 1)
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
