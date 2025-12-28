@@ -21,7 +21,9 @@
                 <Table
                     id="databaseTable"
                     items="{dbModel>/databaseData}"
-                    class="sapUiSmallMarginTop">
+                    class="sapUiSmallMarginTop"
+                    busy="{dbModel>/isLoading}"
+                    busyIndicatorDelay="0">
                     <headerToolbar>
                         <Toolbar>
                             <Title text="Database Records" level="H3"/>
@@ -36,12 +38,20 @@
                         <Column>
                             <Text text="Name"/>
                         </Column>
+                        <Column width="4rem">
+                            <Text text="Actions"/>
+                        </Column>
                     </columns>
                     <items>
                         <ColumnListItem>
                             <cells>
                                 <Text text="{dbModel>ID}"/>
                                 <Text text="{dbModel>Name}"/>
+                                <Button
+                                    icon="sap-icon://delete"
+                                    type="Reject"
+                                    press="onDeleteData"
+                                    tooltip="Delete this record"/>
                             </cells>
                         </ColumnListItem>
                     </items>
@@ -50,14 +60,15 @@
                 <!-- Info Panel -->
                 <Panel headerText="Implementation Notes" class="sapUiSmallMarginTop">
                     <content>
-                        <Text text="This demo shows how a SAP UI5 application would connect to a PostgreSQL database:"/>
+                        <Text text="This demo shows a complete SAP UI5 application with PostgreSQL database connectivity:"/>
                         <VBox class="sapUiSmallMarginTop">
-                            <Text text="1. Database service is bound in manifest.json"/>
-                            <Text text="2. Backend service provides REST API endpoints"/>
-                            <Text text="3. UI5 app calls backend APIs for data operations"/>
-                            <Text text="4. Data is displayed in SAP UI5 controls"/>
+                            <Text text="✓ Database service bound in manifest.json"/>
+                            <Text text="✓ Node.js backend service with REST API endpoints"/>
+                            <Text text="✓ UI5 app calls backend APIs for full CRUD operations"/>
+                            <Text text="✓ Real-time data display with loading indicators"/>
+                            <Text text="✓ Automatic deployment via CI/CD pipelines"/>
                         </VBox>
-                        <Text text="Note: Actual database connection requires a backend service (blocked by trial route quota)" class="sapUiSmallMarginTop"/>
+                        <Text text="Features: Create, Read, Update, Delete operations with PostgreSQL database" class="sapUiSmallMarginTop"/>
                     </content>
                 </Panel>
             </VBox>
