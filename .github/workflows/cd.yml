@@ -25,8 +25,10 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Build MTA
-      run: npm run build:mta
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: mta-archive
 
     - name: Install Cloud Foundry CLI
       run: |
