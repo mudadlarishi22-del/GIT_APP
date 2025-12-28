@@ -32,7 +32,9 @@ jobs:
       run: echo "Integration tests skipped in CI environment - run locally with npm run int-test"
 
     - name: Build MTA
-      run: npx mbt build
+      run: |
+        rm -rf resources mta_archives
+        npx mbt build
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
