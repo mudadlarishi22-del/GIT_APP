@@ -31,11 +31,15 @@ jobs:
     - name: Run integration tests
       run: echo "Integration tests skipped in CI environment - run locally with npm run int-test"
 
+    - name: Build UI5 App
+      run: |
+        npm install
+        npx ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateCachebusterInfo
+        ls -la dist/
+
     - name: Build MTA
       run: |
         rm -rf resources mta_archives
-        npm install
-        npx ui5 build preload --clean-dest --config ui5-deploy.yaml --include-task=generateCachebusterInfo
         npx mbt build --mtar gitapp.mtar
 
     - name: Upload build artifacts
