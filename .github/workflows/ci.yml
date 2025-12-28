@@ -23,7 +23,7 @@ jobs:
       run: npm ci
 
     - name: Install MTA Build Tool
-      run: npm install -g mbt
+      run: npm install -g mbt@1.2.34
 
     - name: Run unit tests
       run: echo "Unit tests skipped in CI environment - run locally with npm run unit-test"
